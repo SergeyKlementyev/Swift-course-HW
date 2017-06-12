@@ -83,4 +83,19 @@ print("caf\u{E9}")
 print("---------------")
 //7.Дана строка, вывести все ее возможные перестановки. Для строки “abc” -> “abc”, “acb”, “bac”, “bca”, “cab”, “cba”. 6 баллов.\
 
+func permutations(_ n: Int,  _ a: inout Array<Character>) {
+    if n == 1 {
+        print(a)
+        return
+    }
+    for i in 0..<n-1 {
+        permutations(n-1,&a)
+        swap(&a[n-1], &a[(n%2 == 1) ? 0 : i])
+    }
+    permutations(n-1,&a)
+}
+
+let str7 = "abc"
+var arr = Array(str7.characters)
+permutations(arr.count,&arr)
 
