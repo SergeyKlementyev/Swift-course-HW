@@ -39,43 +39,22 @@ print("---------------")
 //4.Написать алгоритм определения палиндрома. 4 баллов;
 print("Задача 4")
 
-let polindrom = "abcdededcba" // Строка для проверка на полиндром
-var IsPolindrom = true // Изначально полагаем, что строка полиндром
-
-let middle = (polindrom.characters.count-1)/2 //кол-во итераций цикла
-
-//Так как массив символьный, использование целочисленного индекса невозможно
-
-var start = polindrom.startIndex
-var end = polindrom.index(before: polindrom.endIndex)
-
-for counter in 1...middle{
-    if polindrom[start] != polindrom[end] {
-        IsPolindrom = false
-        break
-    }
-    
-    start = polindrom.index(after: start)
-    end = polindrom.index(before: end)
-}
-print("Строка полиндром: \(IsPolindrom)")
+let str4 = "abcdededcba" // Строка для проверка на полиндром
+let reverseStr4 = String(str4.characters.reversed())
+print(str4 == reverseStr4 ? "polindrom": "not polindrom" )
 print("---------------")
+
+
+
 //5.Проверить строку на уникальность символов. 3 балла;
 print("Задача 5")
-let str5 = "helloqweqe"
-var letters = [Character: Int]()
+let str5 = "helowq"
 
-for character in str5.characters {
-    if let letter = letters[character]{
-        letters[character] = letter + 1
-    } else {
-        letters[character] = 1
-    }
-}
+let numberOfDistinctChars = Set(str5.characters).count
 
-for elem in letters {
-    print(elem)
-}
+print(str5.characters.count == numberOfDistinctChars ? "all characters are unique" : "not all characters are unique " )
+
+
 print("---------------")
 //6.Вывести надпись “café” (с черточкой сверху) без копипаста символа “é”. Подсказка - использовать Unicode. 1 баллов;
 print("Задача 6")

@@ -10,19 +10,12 @@ print("Задача 1")
 
 //Инициализация и заполнение массива 
 
-var intArray = [Int]()
-for index in 1...10 {
-    intArray += [Int(arc4random_uniform(10)+1)+10] }  // добавить случайное число 11...20
-print(intArray)
+let randomArray = (1...100).map{_ in Int(arc4random())%100}
+print(randomArray)
 
 //Расчет среднего арифметического
-
-var sum = 0
-for value in intArray {
-    sum += value
-}
-
-let arithmeticAverage = Double(sum)/Double(intArray.count)
+let sum = randomArray.reduce(0, +)
+let arithmeticAverage = Double(sum)/Double(randomArray.count)
 
 print(arithmeticAverage)
 print("---------------------")
@@ -34,30 +27,20 @@ print("---------------------")
 print("Задача 2")
 var studNames = ["Katia", "Grisha", "Egor", "Andrei", "Ia", "Sviatoslav", "Ia", "Ia"]
 
+//Убираем дубликаты.
+
+let studNamesSet = Set(studNames)
+studNames = Array(studNamesSet)
+
 //Cортировка
 
 studNames.sort {
     $0.characters.count < $1.characters.count
 }
 
-//Убираем дубликаты. Запишем неповторяющиеся эл-ты в новый массив
-
-var length = studNames.count
-print(studNames)
-var studNamesNew = [String]()
-//Учитываем, что массив уже отсортирован...
-for index in 0..<studNames.count-1 {
-    if studNames[index] != studNames[index+1]{
-        studNamesNew.append(studNames[index])
-    }
-}
-
 //Вывести первые три элемента
 
-for index in 0...2 {
-    print(studNamesNew[index], terminator: " ")
-}
-print("\n---------------------")
+print (studNames[0..<3])
 
 
 //Есть множество городов, на путевки в которые у пользователя есть деньги, так же есть множество городов, которые нравятся пользователю, но не факт, что у него есть деньги на путевку, и еще есть множество городов, в которые въезд запрещен в связи с санкциями. Определить множество городов, в которые может поехать пользователь. 3 балла.
