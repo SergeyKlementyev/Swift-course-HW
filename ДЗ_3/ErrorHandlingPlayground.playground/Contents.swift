@@ -18,6 +18,9 @@ class Person {
     var name: String
     var age: Int
     var creditCards: Dictionary<String,CreditCard>
+    deinit {
+        print("person \(name) delited")
+    }
     
     init(name: String, age: Int){
         self.name = name
@@ -72,10 +75,14 @@ class Person {
 
 class CreditCard {
     var balance: Double
-    var owner: Person
+    unowned var owner: Person
     init(owner: Person, balance: Double) {
         self.balance = balance
         self.owner = owner
+    }
+    
+    deinit {
+        print("card delited")
     }
     
     // Снять средства с карты
@@ -92,20 +99,20 @@ class CreditCard {
         balance += amount
     }
 }
-
+var person: Person?
+person = Person(name: "Katia",age: 23)
 do {
-    let person = Person(name: "Katia",age: 23)
-    try person.addCreditCard(cardName: "myCard1", balance: 334)
-    try person.addCreditCard(cardName: "myCard2", balance: 332)
-    try person.addCreditCard(cardName: "myCard3", balance: 213123)
+    try person?.addCreditCard(cardName: "myCard1", balance: 334)
+    try person?.addCreditCard(cardName: "myCard2", balance: 332)
+    try person?.addCreditCard(cardName: "myCard3", balance: 213123)
 //    try person.addCreditCard(cardName: "myCard3", balance: 213123)
-    person.printInfo()
-    try person.depositTo(cardName: "myCard3", amount: 1000000)
-    person.printInfo()
-    try person.withdrawFrom(cardName: "myCard3", amount: 250000)
+    person?.printInfo()
+    try person?.depositTo(cardName: "myCard3", amount: 1000000)
+    person?.printInfo()
+    try person?.withdrawFrom(cardName: "myCard3", amount: 250000)
 //    try person.withdrawFrom(cardName: "myCard", amount: 250000)
-    try person.withdrawFrom(cardName: "myCard3", amount: 25000000)
-    person.printInfo()
+    try person?.withdrawFrom(cardName: "myCard3", amount: 25000000)
+    person?.printInfo()
     
 } catch CreditCardError.cardNotExists(let info) {
     print("cardNotExists about: \(info)")
@@ -114,3 +121,5 @@ do {
 } catch CreditCardError.cardNameAlreadyExists(let info) {
     print("cardNameAlreadyExists about: \(info)")
 }
+person = nil
+
